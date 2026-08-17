@@ -1,0 +1,6 @@
+const scene=document.querySelector('.scene'),sky=document.querySelector('.sky'),garden=document.querySelector('.garden'),fall=document.querySelector('.fall'),button=document.querySelector('.wish-star');
+for(let i=0;i<18;i++){const e=document.createElement('i');e.className='sky-star';e.style.setProperty('--i',i);e.textContent='✦';sky.append(e)}
+for(let i=0;i<9;i++){const e=document.createElement('span');e.className='flower';e.style.setProperty('--i',i);e.innerHTML='<b></b><em></em>';garden.append(e)}
+for(let i=0;i<14;i++){const e=document.createElement('i');e.style.setProperty('--i',i);e.textContent=i%3===0?'♥':'✦';fall.append(e)}
+function playTune(){const C=window.AudioContext||window.webkitAudioContext,c=new C(),notes=[523.25,659.25,783.99,659.25,698.46,659.25,587.33,523.25,783.99,880,783.99,659.25];notes.forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain(),t=c.currentTime+i*.18;o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.001,t);g.gain.linearRampToValueAtTime(.08,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+.32);o.connect(g).connect(c.destination);o.start(t);o.stop(t+.34)})}
+button.addEventListener('click',()=>{if(scene.classList.contains('celebrating'))return;scene.classList.add('celebrating');playTune()});
